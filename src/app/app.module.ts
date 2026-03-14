@@ -11,8 +11,8 @@ import { CharacterListComponent } from './character-list/character-list.componen
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    CharacterListComponent,
-    AppComponent
+    AppComponent,
+    CharacterListComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
