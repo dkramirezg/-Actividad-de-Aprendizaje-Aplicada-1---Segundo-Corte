@@ -1,0 +1,33 @@
+<h2>Lista de Personajes de Rick and Morty</h2>
+
+<div>
+  <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar por nombre">
+  <button (click)="onSearch()">Buscar</button>
+
+  <select [(ngModel)]="selectedStatus" (change)="onStatusChange()">
+    <option value="">Todos los estados</option>
+    <option value="alive">Vivo</option>
+    <option value="dead">Muerto</option>
+    <option value="unknown">Desconocido</option>
+  </select>
+</div>
+
+<div *ngIf="isLoading">Cargando...</div>
+<div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<div class="cards-container">
+  <div *ngFor="let character of characters" class="card">
+    <img [src]="character.image" alt="{{character.name}}">
+    <h3>{{ character.name }}</h3>
+    <p>Estado: {{ character.status }}</p>
+    <p>Especie: {{ character.species }}</p>
+  </div>
+</div>
+
+<div>
+  <button (click)="goToPage(1)" [disabled]="currentPage === 1">Primera</button>
+  <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+  <button *ngFor="let page of getPages()" (click)="goToPage(page)" [class.active]="currentPage === page">{{page}}</button>
+  <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Siguiente</button>
+  <button (click)="goToPage(totalPages)" [disabled]="currentPage === totalPages">Última</button>
+</div>
